@@ -13,12 +13,13 @@
     "gulp-jscs": "^1.6.0",
     "gulp-jscs-stylish": "^1.1.0",
     "gulp-jshint": "^1.10.0",
+    "gulp-util": "^3.0.4",
     "jscs": "^1.13.1",
     "jshint-stylish": "^1.0.2",
-    "mocha": "~1.17.0"
+    "mocha": "^2.2.4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "gulp test && gulp control"
   },
   "repository": {
     "type": "git",
