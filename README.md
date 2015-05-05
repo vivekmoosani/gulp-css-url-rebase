@@ -1,6 +1,6 @@
-# gulp-css-url-rebase
+# gulp-css-url-rebase [![Build Status](https://travis-ci.org/42Zavattas/gulp-css-url-rebase.svg?branch=master)](https://travis-ci.org/42Zavattas/gulp-css-url-rebase)
 
-> Rebase relative image URLs 
+> Rebase relative image URLs
 
 _This project has been forked to fix issues that were not resolved by its original author._
 
