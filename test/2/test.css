@@ -9,3 +9,7 @@
 .with-absolute {
     background: url('/Users/kimjoar/dev/gulp-css-img-path/img/lol.jpg') no-repeat top left;
 }
+
+.with-data {
+    background-image: url(data:image/png;base64,iVBORFAKEBASE64);
+}

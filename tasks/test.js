@@ -1,7 +1,15 @@
 'use strict';
 
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 module.exports = function (done) {
-  exec('./node_modules/.bin/mocha', done);
+  var mocha = spawn('./node_modules/.bin/_mocha');
+
+  mocha.stdout.on('data', function (data) {
+    if (data.length > 1) {
+      console.log(data.toString());
+    }
+  });
+
+  mocha.on('close', done);
 };
