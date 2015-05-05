@@ -17,6 +17,9 @@ var rebaseUrls = function (css, options) {
       if (isAbsolute(url) || validator.isURL(url)) {
         return url;
       }
+      if (/^(data:.*;.*,)/.test(url)) {
+        return url;
+      }
 
       var absolutePath = path.join(options.currentDir, url);
       var p = path.relative(options.root, absolutePath);
