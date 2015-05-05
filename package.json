@@ -1,6 +1,6 @@
 {
-  "name": "gulp-css-rebase-urls",
-  "version": "0.0.5",
+  "name": "gulp-css-url-rebase",
+  "version": "0.1.0",
   "description": "Rebase relative image URLs",
   "main": "index.js",
   "dependencies": {
@@ -23,17 +23,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kjbekkelund/gulp-css-rebase-urls.git"
+    "url": "git://github.com/42Zavattas/gulp-css-url-rebase.git"
   },
   "keywords": [
-    "gulpplugin",
+    "url-rebase",
+    "gulp",
     "css",
-    "url"
+    "url",
+    "rebase"
   ],
   "author": "Kim Joar Bekkelund <kjbekkelund@gmail.com>",
+  "contributors": [
+    "Balthazar Gronon <bgronon@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kjbekkelund/gulp-css-rebase-urls/issues"
+    "url": "https://github.com/42Zavattas/gulp-css-url-rebase/issues"
   },
-  "homepage": "https://github.com/kjbekkelund/gulp-css-rebase-urls"
+  "homepage": "https://github.com/42Zavattas/gulp-css-url-rebase"
 }
