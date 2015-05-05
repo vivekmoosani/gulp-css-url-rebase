@@ -14,10 +14,7 @@ var isAbsolute = function (p) {
 var rebaseUrls = function (css, options) {
   return rework(css)
     .use(rework.url(function (url) {
-      if (isAbsolute(url) || validator.isURL(url)) {
-        return url;
-      }
-      if (/^(data:.*;.*,)/.test(url)) {
+      if (isAbsolute(url) || validator.isURL(url) || /^(data:.*;.*,)/.test(url)) {
         return url;
       }
 
