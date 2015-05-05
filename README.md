@@ -10,15 +10,17 @@ _This project has been forked to fix issues that were not resolved by its origin
 
 ## Example
 
-    var gulp = require('gulp');
-    var rebase = require('gulp-css-url-rebase');
+```javascript
+var gulp = require('gulp');
+var rebase = require('gulp-css-url-rebase');
 
-    gulp.task('default', function () {
-      gulp.src('css/**/*.css')
-        .pipe(rebase())
-        .pipe(concat('style.css'))
-        .pipe(gulp.dest('./build/'));
-    });
+gulp.task('default', function () {
+  gulp.src('css/**/*.css')
+    .pipe(rebase())
+     .pipe(concat('style.css'))
+     .pipe(gulp.dest('./build/'));
+});
+```
 
 ## What it tries to solve
 
@@ -38,22 +40,28 @@ Let's say you have this structure:
 
 In `css/style.css` you might have:
 
-    .sel {
-      background: url('../img/icons/home.png') no-repeat top left;
-    }
+```css
+.sel {
+  background: url('../img/icons/home.png') no-repeat top left;
+}
+```
 
 And in `css/some/deep-path/style.css`:
 
-    .item {
-      background: url('../../../img/logo.jpg') no-repeat top left;
-    }
+```css
+.item {
+  background: url('../../../img/logo.jpg') no-repeat top left;
+}
+```
 
 When I minify everything, for example to be in `./style.css` in
 production. I want this final file for the css above:
 
-    .sel {
-      background: url('img/icons/home.jpg') no-repeat top left;
-    }
-    .item {
-      background: url('img/logo.jpg') no-repeat top left;
-    }
+```css
+.sel {
+  background: url('img/icons/home.jpg') no-repeat top left;
+}
+.item {
+  background: url('img/logo.jpg') no-repeat top left;
+}
+```
