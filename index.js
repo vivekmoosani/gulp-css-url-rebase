@@ -1,7 +1,8 @@
 'use strict';
 
-var rework = require('rework');
 var path = require('path');
+var rework = require('rework');
+var reworkUrl = require('rework-plugin-url');
 var through = require('through2');
 var validator = require('validator');
 
@@ -13,7 +14,7 @@ var isAbsolute = function (p) {
 
 var rebaseUrls = function (css, options) {
   return rework(css)
-    .use(rework.url(function (url) {
+    .use(reworkUrl(function (url) {
       if (isAbsolute(url) || validator.isURL(url) || /^(data:.*;.*,)/.test(url)) {
         return url;
       }
