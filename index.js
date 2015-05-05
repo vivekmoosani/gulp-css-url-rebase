@@ -1,45 +1,47 @@
+'use strict';
+
 var rework = require('rework');
 var path = require('path');
 var through = require('through2');
 var validator = require('validator');
 
-var isAbsolute = function(p) {
-    var normal = path.normalize(p);
-    var absolute = path.resolve(p);
-    return normal == absolute;
+var isAbsolute = function (p) {
+  var normal = path.normalize(p);
+  var absolute = path.resolve(p);
+  return normal === absolute;
 };
 
-var rebaseUrls = function(css, options) {
-    return rework(css)
-        .use(rework.url(function(url){
-            if (isAbsolute(url) && validator.isURL(url)) {
-                return url;
-            }
-            var absolutePath = path.join(options.currentDir, url)
-            var p = path.relative(options.root, absolutePath);
+var rebaseUrls = function (css, options) {
+  return rework(css)
+    .use(rework.url(function (url) {
+      if (isAbsolute(url) && validator.isURL(url)) {
+        return url;
+      }
 
-            if (process.platform === 'win32') {
-                p = p.replace(/\\/g, '/');
-            }
+      var absolutePath = path.join(options.currentDir, url);
+      var p = path.relative(options.root, absolutePath);
 
-            return p;
-        }))
-        .toString();
+      if (process.platform === 'win32') {
+        p = p.replace(/\\/g, '/');
+      }
+
+      return p;
+    })).toString();
 };
 
-module.exports = function(options) {
-    options = options || {};
-    var root = options.root || '.';
+module.exports = function (options) {
+  options = options || {};
+  var root = options.root || '.';
 
-    return through.obj(function(file, enc, cb) {
-        var css = rebaseUrls(file.contents.toString(), {
-            currentDir: path.dirname(file.path),
-            root: path.join(file.cwd, root)
-        });
-
-        file.contents = new Buffer(css);
-
-        this.push(file);
-        cb();
+  return through.obj(function (file, enc, cb) {
+    var css = rebaseUrls(file.contents.toString(), {
+      currentDir: path.dirname(file.path),
+      root: path.join(file.cwd, root)
     });
+
+    file.contents = new Buffer(css);
+
+    this.push(file);
+    cb();
+  });
 };
