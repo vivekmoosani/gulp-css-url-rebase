@@ -9,6 +9,9 @@ var validator = require('validator');
 var isAbsolute = function (p) {
   var normal = path.normalize(p);
   var absolute = path.resolve(p);
+  if (process.platform === 'win32') {
+    absolute = absolute.substr(2);
+  }
   return normal === absolute;
 };
 
