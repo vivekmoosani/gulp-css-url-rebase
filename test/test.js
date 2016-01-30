@@ -52,4 +52,23 @@ describe('gulp-css-url-rebase', function () {
 
   });
 
+  it('should assert when reroot is specified', function (cb) {
+
+    var stream = cssRebaseUrls({ root: './www', reroot: './www/processed' });
+
+    stream.on('data', function (file) {
+      assert.equal(file.contents.toString('utf8'), read('3/expected.css').toString('utf-8'));
+      cb();
+    });
+
+    stream.write(new gutil.File({
+      base: testPath,
+      path: testPath + '/style.css',
+      contents: read('3/test.css')
+    }));
+
+    stream.end();
+
+  });
+
 });
