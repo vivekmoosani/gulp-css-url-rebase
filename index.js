@@ -36,11 +36,25 @@ var rebaseUrls = function (css, options) {
 module.exports = function (options) {
   options = options || {};
   var root = options.root || '.';
+  var reroot = options.reroot || '';
 
   return through.obj(function (file, enc, cb) {
+    var fileDir = path.dirname(file.path);
+
+    // Allows placing the processed CSS in a different root directory while
+    // leaving image resources alone.
+    if (reroot) {
+      var rerootPath = path.join(
+        path.relative(root, reroot),
+        path.relative(root, fileDir)
+      );
+    } else {
+      rerootPath = '';
+    }
+
     var css = rebaseUrls(file.contents.toString(), {
-      currentDir: path.dirname(file.path),
-      root: path.join(file.cwd, root)
+      currentDir: fileDir,
+      root: path.join(file.cwd, root, rerootPath)
     });
 
     file.contents = new Buffer(css);
